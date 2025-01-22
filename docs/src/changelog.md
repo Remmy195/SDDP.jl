@@ -7,6 +7,26 @@ CurrentModule = SDDP
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.10.3 (January 22, 2025)
+
+### Other
+
+ - Add variable bounds to incoming states in [`LagrangianDuality`](@ref) (#819)
+ - Document how to use the [`Threaded`](@ref) parallel scheme (#821)
+
+## v1.10.2 (January 13, 2025)
+
+### Fixed
+
+ - Fixed [`ConvexCombination`](@ref) with intercept terms (#815)
+
+### Other
+
+ - Improved test coverage (#810) (#811)
+ - Improved documentation for risk measures (#813)
+ - Fixed badges for GitHub actions (#816)
+ - Updated API reference (#814)
+
 ## v1.10.1 (November 28, 2024)
 
 ### Fixed
