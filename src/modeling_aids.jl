@@ -306,7 +306,7 @@ function CyclicMarkovianGraph(
     println("Simulations for Markov Nodes Completed...")
 
     # 2) Allocate states
-    states = allocate_support_budget(simulations, budget, scenarios)
+    states = _allocate_support_budget(simulations, budget, scenarios)
     println("States Allocated...")
 
     # 3) Approximate support, probabilities, and transitions
