@@ -24,6 +24,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+using LinearAlgebra
+
 function find_min(x::Vector{T}, y::T) where {T<:Real}
     best_i = 0
     best_z = Inf
@@ -108,7 +110,7 @@ function extended_lattice_approximation(
 
     # Step 1: Quantization using quantiles for each stage
     support = map(1:length(states)) do t
-        compute_quantiles(collect(@view simulation_matrix[t, :]), states[t])
+        _quantiles(collect(@view simulation_matrix[t, :]), states[t])
     end
 
     # Step 2: Initialize probability matrices for each stage transition
@@ -120,7 +122,7 @@ function extended_lattice_approximation(
     for (n, path) in enumerate(simulations)
         dist, last_index = 0.0, 1
         for t in 1:length(states)
-            min_dist, best_idx = find_minimum(support[t], path[t])
+            min_dist, best_idx = find_min(support[t], path[t])
             dist += min_dist^2
             probability[t][last_index, best_idx] += 1.0
             support[t][best_idx] -= min_dist * (support[t][best_idx] - path[t]) / (3000 + n)^0.75
