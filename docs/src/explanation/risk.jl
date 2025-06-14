@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors.        #src
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors.        #src
 #  This Source Code Form is subject to the terms of the Mozilla Public  #src
 #  License, v. 2.0. If a copy of the MPL was not distributed with this  #src
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.             #src
@@ -62,7 +62,7 @@ import Statistics
 #
 # **Axiom 2: translation equivariance**
 #
-# Given two random variables $Z_1$ and $Z_2$, then for all $a \in \mathbb{R}$,
+# Given a random variable $Z$, then for all $a \in \mathbb{R}$,
 # $\mathbb{F}[Z + a] = \mathbb{F}[Z] + a$.
 #
 # **Axiom 3: convexity**

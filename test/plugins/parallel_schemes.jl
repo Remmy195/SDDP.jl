@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors.
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors.
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -18,9 +18,11 @@ procs = Distributed.addprocs(4)
 #    code loading.
 #
 # As hack, run the following script:
-@everywhere begin
-    import Pkg
-    Pkg.activate(".")
+if VERSION < v"1.9"
+    @everywhere begin
+        import Pkg
+        Pkg.activate(joinpath(dirname(@__DIR__), "Project.toml"))
+    end
 end
 
 @everywhere begin

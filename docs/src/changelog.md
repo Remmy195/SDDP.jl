@@ -7,6 +7,63 @@ CurrentModule = SDDP
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.12.0 (June 11, 2025)
+
+### Added
+
+ - Added [`FixedDiscreteDuality`](@ref) (#856)
+
+### Other
+
+ - Added the [Example: batteries](@ref) tutorial (#849)
+ - Improved various docstrings (#851), (#855)
+ - Updated to HiGHS v1.11 (#850)
+ - Skipped a failing test on 32-bit (#853)
+ - Added Oscar's Part IV report (#857)
+
+## v1.11.0 (April 16, 2025)
+
+### Added
+
+ - Added an `optimizer` argument to the various duality handlers to allow
+   different optimizers on the forward and backward passes (#846)
+
+### Other
+
+ - Updated `/papers` and their various citations (#841)
+ - Fixed environment loading in `test/plugins/parallel_schemes.jl` (#842)
+ - Fixed a bug in `/papers/msppy/msppy_hydro_thermal.jl` (#843)
+ - Rotated `DOCUMENTER_KEY` (#845)
+
+## v1.10.5 (April 2, 2025)
+
+### Fixed
+
+ - Fixed a bug in which we discarded the Markovian structure when parsing
+   `MSPFormat` files (#834)
+
+### Other
+
+ - Added documentation [Add a custom cut](@ref) (#832)
+ - Added documentation [Use multithreading](@ref) (#833)
+ - Fixed a typo in [Risk aversion](@ref) (#835)
+ - Changed to use `test/Project.toml` (#837)
+ - Debug and work around a bug in `HiGHS_jll@1.10` (#836), (#839)
+
+## v1.10.4 (January 29, 2025)
+
+### Fixed
+
+ - Throw a warning and limit threads when there are fewer nodes than threads
+   available (#823)
+ - Fixed [`simulate`](@ref) with [`Threaded`](@ref) to spawn chunked threads
+   instead of one thread for each replication (#824) (#828) (#829)
+
+### Other
+
+ - Updated `test/plugins/threaded.jl` to use a module (#825)
+ - Updated the copyright notice to 2025 (#826)
+
 ## v1.10.3 (January 22, 2025)
 
 ### Other

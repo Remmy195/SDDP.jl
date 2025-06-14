@@ -5,6 +5,8 @@ on:
     tags: '*'
   pull_request:
     types: [opened, synchronize, reopened]
+permissions:
+  pull-requests: read  # Required when using `push_preview=true`
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,6 +23,7 @@ jobs:
         env:
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JULIA_NUM_THREADS: 4
         run: julia --color=yes --project=docs/ docs/make.jl
       - uses: errata-ai/vale-action@reviewdog
         with:

@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors.
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors.
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -158,8 +158,11 @@ Documenter.makedocs(;
             "tutorial/example_reservoir.md",
             "tutorial/example_milk_producer.md",
             "tutorial/inventory.md",
+            "tutorial/batteries.md",
+            "tutorial/duality_handlers.md",
         ],
         "How-to guides" => [
+            "guides/use_multithreading.md",
             "guides/access_previous_variables.md",
             "guides/add_a_multidimensional_state_variable.md",
             "guides/add_a_risk_measure.md",
@@ -168,6 +171,7 @@ Documenter.makedocs(;
             "guides/add_noise_in_the_constraint_matrix.md",
             "guides/choose_a_stopping_rule.md",
             "guides/create_a_general_policy_graph.md",
+            "guides/add_a_custom_cut.md",
             "guides/debug_a_model.md",
             "guides/improve_computational_performance.md",
             "guides/simulate_using_a_different_sampling_scheme.md",

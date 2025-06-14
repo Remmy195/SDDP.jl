@@ -12,10 +12,12 @@ hasard
 infeasibilities
 kwargs
 multistock
+[Mm]ultithread(ed|ing)
 [Nn]ewsvendor
 parameteriz(es|ing)
 performant
 preprint
+presolve
 Rethrow
 src
 stagewise
@@ -33,6 +35,7 @@ Geilo
 Gurobi
 Ipopt
 Javascript
+Kvitfjell
 Louveaux
 Markovian
 [Ll]ipschitz

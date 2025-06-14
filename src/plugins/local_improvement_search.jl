@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors and contributors.
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors and contributors.
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -43,7 +43,7 @@ to this purpose:
 The default algorithm is a modified version of BFGS, with a specialized
 back-tracking inexact line-search.
 """
-function minnimize end
+function minimize end
 
 function minimize(f::Function, x₀::Vector{Float64}, lower_bound::Float64 = -Inf)
     return minimize(f, BFGS(100), x₀, lower_bound)

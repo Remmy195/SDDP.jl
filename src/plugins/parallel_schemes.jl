@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors.
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors.
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -369,9 +369,19 @@ function master_loop(
     model::PolicyGraph{T},
     options::Options,
 ) where {T}
+    max_threads = Threads.nthreads()
+    num_nodes = length(model.nodes)
+    if num_nodes < max_threads
+        @warn(
+            "There are fewer nodes in the graph ($num_nodes) than there are " *
+            "threads available ($max_threads). Limiting the number of " *
+            "threads to $num_nodes."
+        )
+        max_threads = num_nodes
+    end
     _initialize_solver(model; throw_error = false)
     keep_iterating, status = true, nothing
-    @sync for _ in 1:Threads.nthreads()
+    @sync for _ in 1:max_threads
         Threads.@spawn begin
             try
                 # This access of `keep_iterating` is not thread-safe, but it
@@ -407,6 +417,18 @@ function master_loop(
     return status
 end
 
+function _chunk_split(num_items, num_chunks)
+    w = div(num_items, num_chunks)
+    chunks = UnitRange{Int}[]
+    offset = 0
+    for i in 1:num_chunks-1
+        push!(chunks, (offset+1):(offset+w))
+        offset += w
+    end
+    push!(chunks, (offset+1):num_items)
+    return chunks
+end
+
 function _simulate(
     model::PolicyGraph,
     ::Threaded,
@@ -414,10 +436,24 @@ function _simulate(
     variables::Vector{Symbol};
     kwargs...,
 )
+    max_threads = Threads.nthreads()
+    num_nodes = length(model.nodes)
+    if num_nodes < max_threads
+        @warn(
+            "There are fewer nodes in the graph ($num_nodes) than there are " *
+            "threads available ($max_threads). Limiting the number of " *
+            "threads to $num_nodes."
+        )
+        max_threads = num_nodes
+    end
     _initialize_solver(model; throw_error = false)
     ret = Vector{Vector{Dict{Symbol,Any}}}(undef, number_replications)
-    @sync for i in 1:number_replications
-        Threads.@spawn ret[i] = _simulate(model, variables; kwargs...)
+    # Limit the number of Threads that we `@spawn` to the number of threads.
+    # Naively spawning `number_replications` threads can slow down the scheduler.
+    @sync for chunk in _chunk_split(number_replications, max_threads)
+        Threads.@spawn for j in chunk
+            ret[j] = _simulate(model, variables; kwargs...)
+        end
     end
     return ret
 end

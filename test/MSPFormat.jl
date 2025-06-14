@@ -1,4 +1,4 @@
-#  Copyright (c) 2017-24, Oscar Dowson and SDDP.jl contributors.
+#  Copyright (c) 2017-25, Oscar Dowson and SDDP.jl contributors.
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -113,8 +113,10 @@ function test_electric_non_stagewise()
         joinpath(@__DIR__, "electric-tree.lattice.json"),
     )
     @test length(model_tree.nodes) == 5
-    @test model_tree["0"].children == SDDP.Noise.(["2", "3"], [0.3, 0.7])
-    @test model_tree["1"].children == SDDP.Noise.(["3", "4"], [0.4, 0.6])
+    @test model_tree["0"].children ==
+          SDDP.Noise.(["2", "3", "4"], [0.3, 0.7, 0.0])
+    @test model_tree["1"].children ==
+          SDDP.Noise.(["2", "3", "4"], [0.0, 0.4, 0.6])
     @test model_tree["2"].children == SDDP.Noise{String}[]
     @test model_tree["3"].children == SDDP.Noise{String}[]
     @test model_tree["4"].children == SDDP.Noise{String}[]
