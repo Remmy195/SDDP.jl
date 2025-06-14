@@ -7,7 +7,7 @@
 
 [SDDP.jl](https://github.com/odow/SDDP.jl) is a JuMP extension for solving large
 convex multistage stochastic programming problems using stochastic dual dynamic
-programming.
+programming. In this fork I implemented a form of cyclic markov graph
 
 ## License
 
